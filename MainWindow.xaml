@@ -3,10 +3,70 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Losowanie"
+        
+        xmlns:conv="clr-namespace:Losowanie.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        
+        Title="MainWindow" Height="450" Width="900"
+        Background="#f7eac1">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="#f7dc63"/>
+            <Setter Property="BorderBrush" Value="#dbb91f"/>
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
 
+        <conv:PipsConverter x:Key="pipsConverter"/>
+        <conv:DiceConverter x:Key="diceConverter"/>
+    </Window.Resources>
+    <Grid Margin="100 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <Border BorderBrush="#bf0000" Margin="0 20" BorderThickness="4" CornerRadius="20">
+                <StackPanel Orientation="Horizontal" Margin="20" HorizontalAlignment="Center">
+                    <Image Source="{Binding FirstDice, Converter={StaticResource diceConverter}}" Width="70" Margin="10"/>
+                    <Image Source="{Binding SecondDice, Converter={StaticResource diceConverter}}" Width="70" Margin="10"/>
+                    <Image Source="{Binding ThirdDice, Converter={StaticResource diceConverter}}" Width="70" Margin="10"/>
+                    <Image Source="{Binding FourthDice, Converter={StaticResource diceConverter}}" Width="70" Margin="10"/>
+                    <Image Source="{Binding FifthDice, Converter={StaticResource diceConverter}}" Width="70" Margin="10"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Button Grid.Column="1" Content="Losuj" Click="Randomize_Click"/>
+
+        <StackPanel Margin="0 0 0 20" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <DataGrid ItemsSource="{Binding DiceThrows}" Margin="0 0 20 0" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Rzut" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Wylosowane oczka" Binding="{Binding Pips, Converter={StaticResource pipsConverter}}"/>
+                    <DataGridTextColumn Header="Suma pkt" Binding="{Binding Sum}"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Label Content="Suma punktów" Foreground="#bf0000" FontSize="20" FontWeight="Bold"/>
+                <Label Name="sumLbl" FontSize="20" FontWeight="Bold" Content="{Binding Sum}" HorizontalAlignment="Center"></Label>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Nowa gra" Click="NewGame_Click" Margin="0 0 50 0"/>
+            <Button Content="Zapisz wynik" Click="Save_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

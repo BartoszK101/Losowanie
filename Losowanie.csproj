@@ -1,3 +1,4 @@
+
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -7,5 +8,25 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\k1.jpg" />
+    <None Remove="Images\k2.jpg" />
+    <None Remove="Images\k3.jpg" />
+    <None Remove="Images\k4.jpg" />
+    <None Remove="Images\k5.jpg" />
+    <None Remove="Images\k6.jpg" />
+    <None Remove="Images\question.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\k1.jpg" />
+    <Resource Include="Images\k2.jpg" />
+    <Resource Include="Images\k3.jpg" />
+    <Resource Include="Images\k4.jpg" />
+    <Resource Include="Images\k5.jpg" />
+    <Resource Include="Images\k6.jpg" />
+    <Resource Include="Images\question.jpg" />
+  </ItemGroup>
 
 </Project>
