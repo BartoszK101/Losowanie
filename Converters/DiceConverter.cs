@@ -1,7 +1,6 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-
 
 namespace Losowanie.Converters
 {
@@ -28,7 +27,6 @@ namespace Losowanie.Converters
 
             throw new NotImplementedException();
         }
-
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
